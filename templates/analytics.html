@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudentSpend - Analytics</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <style>
+
+        .analytics-content {
+            padding: 30px;
+        }
+
+        .analytics-title {
+            margin-bottom: 25px;
+        }
+
+        .analytics-title h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .analytics-title p {
+            color: #7b8190;
+            font-size: 14px;
+        }
+
+        .analytics-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .analytics-card {
+            background: white;
+            border: 1px solid #e8ebf2;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .analytics-card span {
+            color: #858b9a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .analytics-card h2 {
+            margin-top: 12px;
+            font-size: 25px;
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .analytics-panel {
+            background: white;
+            border: 1px solid #e8ebf2;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .analytics-panel h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .analytics-panel > p {
+            color: #858b9a;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .category-item {
+            margin-bottom: 18px;
+        }
+
+        .category-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+
+        .category-bar {
+            height: 9px;
+            background: #eeeeF5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .category-progress {
+            height: 100%;
+            background: #635bff;
+            border-radius: 20px;
+        }
+
+        .insight-box {
+            background: #f6f4ff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+
+        .insight-box strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .insight-box p {
+            font-size: 13px;
+            color: #626879;
+            line-height: 1.6;
+        }
+
+        .expense-highlight {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eeeeF3;
+        }
+
+        .expense-highlight:last-child {
+            border-bottom: none;
+        }
+
+        .expense-name strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .expense-name span {
+            color: #858b9a;
+            font-size: 12px;
+        }
+
+        .expense-amount {
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        .back-dashboard {
+            display: inline-block;
+            margin-top: 5px;
+            color: #635bff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1000px) {
+
+            .analytics-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-content {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                S
+            </div>
+
+            <div>
+
+                <h2>StudentSpend</h2>
+
+                <span>Finance Manager</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a
+                href="/"
+                class="menu-item"
+            >
+                <span>▣</span>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="/"
+                class="menu-item"
+            >
+                <span>₹</span>
+                <span>Expenses</span>
+            </a>
+
+
+            <a
+                href="/"
+                class="menu-item"
+            >
+                <span>◉</span>
+                <span>Budget</span>
+            </a>
+
+
+            <a
+                href="/analytics"
+                class="menu-item active"
+            >
+                <span>◔</span>
+                <span>Analytics</span>
+            </a>
+
+
+            <a
+                href="/#transactions"
+                class="menu-item"
+            >
+                <span>▤</span>
+                <span>Transactions</span>
+            </a>
+
+        </nav>
+
+
+        <div class="menu-title">
+            ACCOUNT
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a
+                href="#"
+                class="menu-item"
+            >
+                <span>⚙</span>
+                <span>Settings</span>
+            </a>
+
+
+            <a
+                href="/"
+                class="menu-item"
+            >
+                <span>↪</span>
+                <span>Dashboard</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="upgrade-card">
+
+                <div class="upgrade-icon">
+                    ✦
+                </div>
+
+                <h3>Smart Insights</h3>
+
+                <p>
+                    Understand your spending patterns.
+                </p>
+
+                <button>
+                    Explore
+                </button>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <header class="topbar">
+
+            <div class="mobile-logo">
+                StudentSpend
+            </div>
+
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search..."
+                >
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button class="notification">
+                    🔔
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="profile-avatar">
+                        H
+                    </div>
+
+
+                    <div class="profile-info">
+
+                        <strong>
+                            Himanshu
+                        </strong>
+
+                        <span>
+                            Student
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ANALYTICS CONTENT -->
+
+        <div class="analytics-content">
+
+
+            <div class="analytics-title">
+
+                <h1>
+                    Analytics
+                </h1>
+
+                <p>
+                    Understand your spending patterns and financial habits.
+                </p>
+
+                <a
+                    href="/"
+                    class="back-dashboard"
+                >
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+
+            <!-- SUMMARY CARDS -->
+
+            <section class="analytics-cards">
+
+
+                <div class="analytics-card">
+
+                    <span>
+                        TOTAL SPENT
+                    </span>
+
+                    <h2>
+                        ₹{{ "%.0f"|format(total_spent) }}
+                    </h2>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <span>
+                        TOTAL TRANSACTIONS
+                    </span>
+
+                    <h2>
+                        {{ total_transactions }}
+                    </h2>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <span>
+                        AVERAGE EXPENSE
+                    </span>
+
+                    <h2>
+                        ₹{{ "%.0f"|format(average_expense) }}
+                    </h2>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <span>
+                        TOP CATEGORY
+                    </span>
+
+
+                    <h2>
+
+                        {% if highest_category %}
+
+                            {{ highest_category["category"] }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </h2>
+
+                </div>
+
+            </section>
+
+
+            <!-- ANALYTICS GRID -->
+
+            <section class="analytics-grid">
+
+
+                <!-- CATEGORY BREAKDOWN -->
+
+                <div class="analytics-panel">
+
+                    <h2>
+                        Category Breakdown
+                    </h2>
+
+                    <p>
+                        See where your money is going.
+                    </p>
+
+
+                    {% if category_data %}
+
+
+                        {% for category in category_data %}
+
+                            {% if total_spent > 0 %}
+
+                                {% set percentage =
+                                    (category["total"] /
+                                    total_spent) * 100
+                                %}
+
+                            {% else %}
+
+                                {% set percentage = 0 %}
+
+                            {% endif %}
+
+
+                            <div class="category-item">
+
+
+                                <div class="category-top">
+
+                                    <strong>
+                                        {{ category["category"] }}
+                                    </strong>
+
+
+                                    <span>
+                                        ₹{{ "%.0f"|format(
+                                            category["total"]
+                                        ) }}
+
+                                        ·
+
+                                        {{ "%.1f"|format(
+                                            percentage
+                                        ) }}%
+                                    </span>
+
+                                </div>
+
+
+                                <div class="category-bar">
+
+                                    <div
+                                        class="category-progress"
+                                        style="width: {{ percentage }}%;"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <p>
+                            No expense data available yet.
+                        </p>
+
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- SPENDING INSIGHTS -->
+
+                <div class="analytics-panel">
+
+                    <h2>
+                        Spending Insights
+                    </h2>
+
+                    <p>
+                        Quick summary of your spending.
+                    </p>
+
+
+                    {% if highest_category %}
+
+
+                        <div class="insight-box">
+
+                            <strong>
+                                Highest Spending Category
+                            </strong>
+
+                            <p>
+
+                                You have spent
+
+                                <strong>
+                                    ₹{{ "%.0f"|format(
+                                        highest_category["total"]
+                                    ) }}
+                                </strong>
+
+                                on
+
+                                <strong>
+                                    {{ highest_category["category"] }}
+                                </strong>
+
+                                so far.
+
+                            </p>
+
+                        </div>
+
+
+                    {% else %}
+
+
+                        <div class="insight-box">
+
+                            <strong>
+                                No spending data
+                            </strong>
+
+                            <p>
+                                Add some expenses to generate insights.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                    {% if highest_expense %}
+
+
+                        <div class="expense-highlight">
+
+                            <div class="expense-name">
+
+                                <strong>
+                                    Largest Expense
+                                </strong>
+
+                                <span>
+                                    {{ highest_expense["name"] }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="expense-amount">
+
+                                ₹{{ "%.0f"|format(
+                                    highest_expense["amount"]
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                    <div class="expense-highlight">
+
+                        <div class="expense-name">
+
+                            <strong>
+                                Average Expense
+                            </strong>
+
+                            <span>
+                                Per transaction
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            ₹{{ "%.0f"|format(
+                                average_expense
+                            ) }}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT DAILY DATA -->
+
+            <section class="analytics-panel">
+
+                <h2>
+                    Recent Daily Spending
+                </h2>
+
+                <p>
+                    Your latest spending activity.
+                </p>
+
+
+                {% if daily_data %}
+
+
+                    {% for day in daily_data %}
+
+
+                        <div class="expense-highlight">
+
+                            <div class="expense-name">
+
+                                <strong>
+                                    {{ day["date"] }}
+                                </strong>
+
+                                <span>
+                                    Daily spending
+                                </span>
+
+                            </div>
+
+
+                            <div class="expense-amount">
+
+                                ₹{{ "%.0f"|format(
+                                    day["total"]
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <p>
+                        No daily spending data available.
+                    </p>
+
+
+                {% endif %}
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

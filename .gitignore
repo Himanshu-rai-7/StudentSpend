@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+
+venv/
+.venv/
+
+studentspend.db
+
+.env
+
+.vscode/
+
+.DS_Store
+Thumbs.db

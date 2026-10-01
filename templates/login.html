@@ -1,0 +1,144 @@
+
+<!doctype html>
+<html>
+<head>
+
+<title>StudentSpend Login</title>
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:#f5f7fb;
+    display:grid;
+    place-items:center;
+    min-height:100vh;
+    color:#172033;
+}
+
+.card{
+    width:min(420px,90%);
+    background:white;
+    padding:32px;
+    border-radius:18px;
+    box-shadow:0 15px 50px #17203318;
+}
+
+h1{
+    margin:0 0 8px;
+}
+
+p{
+    color:#6d7485;
+}
+
+.brand{
+    color:#635bff;
+    font-weight:800;
+    font-size:22px;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px;
+    margin:7px 0;
+    border:1px solid #dfe3ec;
+    border-radius:9px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    background:#635bff;
+    color:white;
+    font-weight:700;
+    margin-top:10px;
+    cursor:pointer;
+}
+
+.error{
+    color:#c62828;
+    background:#fff0f0;
+    padding:10px;
+    border-radius:8px;
+}
+
+.link{
+    text-align:center;
+    margin-top:18px;
+}
+
+.link a{
+    color:#635bff;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="brand">
+StudentSpend
+</div>
+
+<h1>
+Welcome back
+</h1>
+
+<p>
+Sign in to manage your student finances.
+</p>
+
+{% if error %}
+<div class="error">
+{{ error }}
+</div>
+{% endif %}
+
+<form method="post">
+
+<input
+    type="email"
+    name="email"
+    placeholder="Email"
+    required
+>
+
+<input
+    type="password"
+    name="password"
+    placeholder="Password"
+    required
+>
+
+<button>
+Login
+</button>
+
+</form>
+
+<div class="link">
+New here?
+<a href="/register">
+Create account
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
